@@ -9,14 +9,14 @@ public:
 // конструктор
 Exception(const char* arg_message)
 {
-    message = new char[strlen(arg_message) +1 ];
-    strcpy(message,arg_message);
+    message = new char[strlen(arg_message) +1 ]; //выделяем память под сообщение и получаем его длину
+    strcpy(message,arg_message); //сохраняем сообщение
 }
 // конструктор копирования
 Exception(const Exception& arg)
 {
-    message = new char[strlen(arg.message) +1 ];
-    strcpy(message,arg.message);
+    message = new char[strlen(arg.message) +1 ]; //выделяем память под сообщение и получаем его длину
+    strcpy(message,arg.message); //сохраняем сообщение
 }
 // деструктор
 ~Exception()

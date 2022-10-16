@@ -27,57 +27,57 @@ private:
 //метод перебора значений стека
 template <class T>void Stack<T>::Print(std::function<void(const T &k)> f) const
 {
-    Node *tmp = nd;
+    Node *tmp = nd; //указатель на последний элемент
     while (tmp != nullptr)
     {
-        f(tmp->key);
-        tmp = tmp->pr;
+        f(tmp->key); //вызов функции обратной связи
+        tmp = tmp->pr; //указатель на предыдущий
     }
 }
 //размерность стека
 template <class T> int Stack<T>::Size()
 {
-    return size;
+    return size; //размер стека
 }
 //удаление из стека всех узлов
 template <class T> void Stack<T>::Clear()
 {
-    while (nd != nullptr)
+    while (nd != nullptr) //пока в стеке есть элементы
     {
         Node *tmp = nd;
         nd = nd->pr;
-        delete tmp;
+        delete tmp; //удаляем узлы
     }
 }
 //деструктор
 template <class T>Stack<T>::~Stack()
 {
-    Clear();
+    Clear(); //удаление из стека всех узлов
 }
 //помещение объекта в стек
 template <class T>void Stack<T>::Push(const T &k)
 {
-    Node *node = new Node{ k, nd };
+    Node *node = new Node{ k, nd }; //создаем новый узел
     if (node == nullptr)
     {
         throw Exception("Память заполнена");
     }
-    nd = node;
-    size++;
+    nd = node; //присваиваем вершину к новому узлу
+    size++; //увеличиваем размер
 }
 
-//извлечение объекта из стека
+//извлечение объекта из стека и возвращающий этот элемент
 template <class T> const T Stack<T>::Pop()
 {
-    if (nd == nullptr)
+    if (nd == nullptr) //если стек пуст
     {
-        throw EStackEmpty();
+        throw EStackEmpty(); //вызываем исключение
     }
-    const T k = nd->key;
-    Node *tmp = nd;
-    nd = nd->pr;
-    delete tmp;
-    size--;
-    return k;
+    const T k = nd->key; //получаем значения которое удалится
+    Node *tmp = nd; //запоминаем узел который будет удален
+    nd = nd->pr; //присваиваем вершине следующее значение
+    delete tmp; //удаляем предыдущий узел
+    size--; //уменьшаем размер стека
+    return k; //возвращаем значение
 }
 #endif // STACK_H
