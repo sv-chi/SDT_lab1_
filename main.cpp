@@ -5,16 +5,22 @@
 #include <stdlib.h>
 #include <locale.h>
 
+
 using namespace std;
 
 int main()
 {
- Stack<int> st;
-for(int i = 0;i<10;i++)
+   //тесты  стека
+
+ Stack<int> stacktest; //создан пустой стек
+ cout << "Stack size: " << stacktest.Size() << endl;//проверяем размер стека
+
+ for(int i = 0;i<4;i++)
 {
-    st.Push(i);
+    stacktest.Push(i);//добавили в стек
 }
-st.Pop();
-cout<<st.Size()<<endl;
+ stacktest.Pop(); //извлечение из стека 3
+ cout << "Stack size: " << stacktest.Size() << endl;//проверяем размер стека
+
     return 0;
 }
