@@ -16,6 +16,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    Person.h \
+    PersonKeeper.h \
     estackempty.h \
     estackexception.h \
     stack.h
