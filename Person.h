@@ -23,15 +23,25 @@ public:
     void Set_p_name(const QString &p_name) {
         this->p_name = p_name;
     }
-    const QString &Get_l_name() const { return l_name; }//getter фамилии
-    const QString &Get_f_name() const { return f_name; }//getter имени
-    const QString &Get_p_name() const { return p_name; }//getter отвество
+    const QString &Get_l_name() const { return l_name; }
+    const QString &Get_f_name() const { return f_name; }
+    const QString &Get_p_name() const { return p_name; }
 
 };
 
 Person::Person(QString full_name)//метод разбиения строки на подстроки:фамилия, имя, отчество. Можно без отчества
 {
-
+    QStringList str = full_name.split(QRegularExpression("\\s+"), Qt::SkipEmptyParts);//разбиение
+    if (str.size() != 2 && str.size() != 3)//если размер строки не равен 2, 3, то выводим сообщение в ошибке
+    {
+        throw "Size error";
+    }
+    l_name = str[0];
+    f_name = str[1];
+    if (str.size() == 3)
+    {
+        p_name = str[2];
+    }
 }
 
 #endif // PERSON_H
