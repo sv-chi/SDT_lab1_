@@ -23,11 +23,11 @@ int main()
  cout << "Stack size: " << stacktest.Size() << endl;//проверяем размер стека
 
  PersonKeeper &person(PersonKeeper::Instance());
-    QString path1 = "C:\\CHIKAEED\\untitled5\\ReadPerson.txt";
-    QString path2 = "C:\\CHIKAEED\\untitled5\\WritePerson.txt";
-    person.Clear();
-    person.ReadPersons(path1);
-    person.WritePersons(path2);
+ QString path1 = "C:\\CHIKAEED\\untitled5\\ReadPerson.txt";
+ QString path2 = "C:\\CHIKAEED\\untitled5\\WritePerson.txt";
+ person.Clear();
+ person.ReadPersons(path1);
+ person.WritePersons(path2);
 
     return 0;
 }

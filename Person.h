@@ -36,11 +36,11 @@ Person::Person(QString full_name)//метод разбиения строки н
     {
         throw "Size error";
     }
-    l_name = str[0];
-    f_name = str[1];
+    l_name = str[0];//присваиваем фамилию
+    f_name = str[1]; //присваиваем имя
     if (str.size() == 3)
     {
-        p_name = str[2];
+        p_name = str[2]; //присваиваем отчество
     }
 }
 

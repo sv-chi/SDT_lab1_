@@ -5,7 +5,8 @@
 #include "Person.h"
 #include <QTextStream>
 #include <QFile>
-//паттер Singleton
+
+//паттерн Singleton
 class PersonKeeper
 {
 private:
@@ -23,22 +24,23 @@ public:
 
 };
 
-
+//количество человек
 int PersonKeeper::Size()
 {
     return s.Size();
 }
+//стереть человека
 void PersonKeeper::Clear()
 {
     return s.Clear();
 }
-
+//хранится единственный экземпляр класса
 PersonKeeper &PersonKeeper::Instance()
 {
     static PersonKeeper instance;
     return instance;
 }
-
+//читаем файл
 void PersonKeeper::ReadPersons(QString path)
 {
     QFile file(path);
@@ -46,15 +48,14 @@ void PersonKeeper::ReadPersons(QString path)
     {
         throw "Файл не открыт";
     }
-    QTextStream stream(&file);
-    QString l;
+    QTextStream stream(&file);//поток текстовых данных файла
+    QString l;//считывание в буфер строк
     while (stream.readLineInto(&l))
-    { s.Push(Person(l));
+    { s.Push(Person(l));//добавляем человека
     }
-    file.close();
+    file.close();//закрываем файл
 }
-
-
+//запись файла
 void PersonKeeper::WritePersons(QString path) const
 {
     QFile file(path);
@@ -62,11 +63,11 @@ void PersonKeeper::WritePersons(QString path) const
     {
         throw "Файл не открыт";
     }
-    QTextStream stream(&file);
-    s.Print([&](const Person &k)
+    QTextStream stream(&file);//поток текстовых данных файла
+    s.Print([&](const Person &k)//перебор значения
     {
         stream << k.Get_l_name() << " " << k.Get_f_name() << " " << k.Get_p_name() << Qt::endl;//записываем человека в файл
     });
-    file.close();
+    file.close();//закрываем файл
 };
 #endif
