@@ -5,7 +5,7 @@ class EStackEmpty : public Exception
 {
 public:
     // конструктор по умолчанию
-    EStackEmpty(): Exception("Данный стек пуст"){} //инициализируем базовый класс с сообщением об ошибке
+    EStackEmpty(): Exception("This stack is empty"){} //инициализируем базовый класс с сообщением об ошибке
 
     // конструктор копирования
     EStackEmpty(const EStackEmpty &st): Exception(st){} //инициализируем базовый класс переданным аргуметом
