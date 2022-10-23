@@ -23,11 +23,13 @@ int main()
 
 //тест стека 2
  Stack<int> stacktest2; // создаем пустой стек
-   int num = 5;
+   int num = 2;
    stacktest2.Push(num);
+  // cout << "Stack size: " << stacktest2.Size() << endl;//проверяем размер стека
    stacktest2.Push(10);
+  // cout << "Stack size: " << stacktest2.Size() << endl;//проверяем размер стека
    cout << stacktest2.Pop() << ' ' << stacktest2.Pop() << endl;
-   try {
+  try {
        stacktest2.Pop(); // пытаемся получить последний элемент
    }  catch (const EStackEmpty & exception) {
        cout << exception.what() << endl; //выводим ошибку
