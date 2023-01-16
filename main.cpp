@@ -18,7 +18,7 @@ int main()
 {
     stacktest.Push(i);//добавили в стек
 }
- stacktest.Pop(); //извлечение из стека 3
+ stacktest.Pop(); //извлечение из стека последнего эл-та
  cout << "Stack size: " << stacktest.Size() << endl;//проверяем размер стека
 
 //тест стека 2
@@ -42,9 +42,7 @@ int main()
    }
 
    cout << "Print float: ";
-   stacktest3.Print([&](const float &k){ //печатаем значения типа float
-           cout<<k<<" ";
-       });
+   stacktest3.Print();
 
 //тест стека 4
    Stack<string> stacktest4;
@@ -52,13 +50,13 @@ int main()
    cout << endl;
    stacktest4.Push(v2);
    stacktest4.Push(v1);
-   stacktest4.Print([&](const string &k){
-           cout<<k<<" ";
-       });
+   stacktest4.Print();
    cout <<endl;
 
+ Person P("f","i","o");
+ P.Get_l_name()="fio";
 //тест PersonKeeper 1
- PersonKeeper &person(PersonKeeper::Instance());
+ PersonKeeper &person = PersonKeeper::Instance();
  QString path1 = "C:\\CHIKAEED\\untitled5\\ReadPerson.txt";
  QString path2 = "C:\\CHIKAEED\\untitled5\\WritePerson.txt";
  person.Clear();

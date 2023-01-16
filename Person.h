@@ -11,37 +11,45 @@ private:
     QString f_name;//имя
     QString p_name;//отчество
 public:
+    bool parseName(QString full_name){
+        QStringList str = full_name.split(QString(" "));//разбиение
+        if (str.size() != 2 && str.size() != 3)//если размер строки не равен 2, 3, то выводим сообщение в ошибке
+            {
+              //throw "Size error";
+            return false;
+            }
+        l_name = str[0];//присваиваем фамилию
+        _name = str[1]; //присваиваем имя
+            if (str.size() == 3){
+                p_name = str[2]; //присваиваем отчество
+            }
+        return true;
+    }
     Person(){}// конструктор по умолчанию
-    Person(QString l_name, QString f_name, QString p_name): l_name(l_name), f_name(f_name), p_name(p_name){ }//конструктор с аргументами
-    Person(QString full_name);
-    void Set_l_name(const QString &l_name) {
-        this->l_name = l_name;
+    //конструктор с аргументами
+    Person(QString l_n, QString f_n, QString p_n){
+        l_name = l_n;//в поля заносим значения параметров
+        f_name = f_n;
+        p_name = p_n;
     }
-    void Set_f_name(const QString &f_name) {
-        this->f_name = f_name;
+
+    //задать значения
+    void Set_l_name(const QString &l_n) {
+        l_name = l_n;
     }
-    void Set_p_name(const QString &p_name) {
-        this->p_name = p_name;
+    void Set_f_name(const QString &f_n) {
+        f_name = f_n;
     }
-    const QString &Get_l_name() const { return l_name; }
-    const QString &Get_f_name() const { return f_name; }
-    const QString &Get_p_name() const { return p_name; }
+    void Set_p_name(const QString &p_n) {
+        p_name = p_n;
+    }
+    //получить значения
+     QString Get_l_name()  { return l_name; }
+     QString Get_f_name()  { return f_name; }
+     QString Get_p_name()  { return p_name; }
 
 };
 
-Person::Person(QString full_name)//метод разбиения строки на подстроки:фамилия, имя, отчество. Можно без отчества
-{
-    QStringList str = full_name.split(QRegularExpression("\\s+"), Qt::SkipEmptyParts);//разбиение
-    if (str.size() != 2 && str.size() != 3)//если размер строки не равен 2, 3, то выводим сообщение в ошибке
-    {
-        throw "Size error";
-    }
-    l_name = str[0];//присваиваем фамилию
-    f_name = str[1]; //присваиваем имя
-    if (str.size() == 3)
-    {
-        p_name = str[2]; //присваиваем отчество
-    }
-}
+
 
 #endif // PERSON_H

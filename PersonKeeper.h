@@ -10,17 +10,16 @@
 class PersonKeeper
 {
 private:
-    PersonKeeper(){}// конструкторы по умолчанию
-    PersonKeeper(const PersonKeeper &);//конструктор копирования
+    PersonKeeper(){}// конструктор по умолчанию
     ~PersonKeeper(){}//деструктор
-    PersonKeeper &operator=(const PersonKeeper &);//оператор присовения
     Stack<Person> s;//имена
+
 public:
     static PersonKeeper &Instance();// хранится единственный экземпляр класса
     void ReadPersons(QString path);//читаем файл
-    void WritePersons(QString path) const;//запись файла
-    int Size();//количество человек
-    void Clear();//стереть человека
+    void WritePersons(QString path);//запись файла
+    int Size();//размер стека
+    void Clear();//очистить стек
 
 };
 
@@ -32,7 +31,7 @@ int PersonKeeper::Size()
 //стереть человека
 void PersonKeeper::Clear()
 {
-    return s.Clear();
+    s.Clear();
 }
 //хранится единственный экземпляр класса
 PersonKeeper &PersonKeeper::Instance()
@@ -43,31 +42,56 @@ PersonKeeper &PersonKeeper::Instance()
 //читаем файл
 void PersonKeeper::ReadPersons(QString path)
 {
-    QFile file(path);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))//проверка, открылся ли файл для чтения
+    QFile file(path);//создаётся объект типа QFile по путю
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))//проверка, открылся ли файл для чтения(только для чтения и только текстовый)
     {
         throw "Файл не открыт";
     }
     QTextStream stream(&file);//поток текстовых данных файла
-    QString l;//считывание в буфер строк
-    while (stream.readLineInto(&l))
-    { s.Push(Person(l));//добавляем человека
+    QString l;// для считывания строк
+    while (stream.readLineInto(&l))//пока есть строки
+    {
+        Person person = Person();
+        if (person.parseName(l)){
+            s.Push(person);//Создаём человека по строке и добавляем в стек
+        }
     }
     file.close();//закрываем файл
 }
 //запись файла
-void PersonKeeper::WritePersons(QString path) const
+void PersonKeeper::WritePersons(QString path)
 {
-    QFile file(path);
+    QFile file(path);//создаётся объект типа QFile по путю
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))//открываем файл для записи
     {
         throw "Файл не открыт";
     }
     QTextStream stream(&file);//поток текстовых данных файла
-    s.Print([&](const Person &k)//перебор значения
-    {
-        stream << k.Get_l_name() << " " << k.Get_f_name() << " " << k.Get_p_name() << Qt::endl;//записываем человека в файл
-    });
+    Stack <Person> sp(s);//создали стек персонов равный стеку s
+     Person P;//временная переменная с ФИО
+     for (int i=0;i<s.Size();i++){
+         P =sp.Pop();//извлекаем из стека по одному персону
+
+    stream << P.Get_l_name() << " " << P.Get_f_name() << " " << P.Get_p_name() << Qt::endl;//записываем человека в файл
+}
     file.close();//закрываем файл
+
 };
 #endif
+
+/*Stack <Person> sp(s), ts, temp;//копия стека и временный пустой стек
+ Person P;//временная переменная с ФИО
+
+ //заполняем временный стек значениями из копии исходного стека
+ for (int i=0;i<s.size;i++)
+     ts.Push(sp.Pop());//обратный порядок
+
+ for (int i=0;i<s.size;i++){//возвращаем значения в изначальный стек
+     Person p = ts.Pop();
+     sp.Push(p);
+     temp.Push(p);
+ }
+
+ for (int i=0;i<s.size;i++){
+        P = temp.Pop();
+*/

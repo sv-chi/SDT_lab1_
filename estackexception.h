@@ -25,5 +25,6 @@ Exception(const Exception& arg)
 }
 
     const char* what() const { return message; }
+/*класс должен содержать публичный метод char* what(), возвращающий диагностическое сообщение*/
 };
 #endif // ESTACKEXCEPTION_H
